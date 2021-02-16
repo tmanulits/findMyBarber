@@ -2,7 +2,7 @@
 //  ImageCell.swift
 //  TableTest1
 //
-//  Created by Tim Manu on 1/8/20.
+//  Created by Tim Manu on 11/8/20.
 //  Copyright © 2020 Tim Manu. All rights reserved.
 //
 
@@ -22,7 +22,6 @@ class ImageCell: UICollectionViewCell {
     let storeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        //imageView.image = UIImage(named: "haircut2")
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -37,7 +36,6 @@ class ImageCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupViews()
-//        setupCostraints()
     }
     
     override func layoutSublayers(of layer: CALayer) {
@@ -46,7 +44,6 @@ class ImageCell: UICollectionViewCell {
         
         let colorSet = [UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0),
                         UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)]
-        //let location = [0.2, 1.0]
         let location = [0.8, 1.06]
         
         storeImageView.addGradient(with: gradientLayer, colorSet: colorSet, locations: location)
@@ -57,16 +54,6 @@ class ImageCell: UICollectionViewCell {
 //        addSubview(pageControl)
         storeImageView.pin(to: contentView)
     }
-    
-    
-//    func setupCostraints() {
-//        pageControl.translatesAutoresizingMaskIntoConstraints = false
-//        pageControl.centerYAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15).isActive = true
-//        pageControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-//        pageControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-//        pageControl.heightAnchor.constraint(equalToConstant: 0.1).isActive = true
-//    }
-    
     
     
     required init?(coder: NSCoder) {

@@ -2,8 +2,8 @@
 //  SceneDelegate.swift
 //  TableTest1
 //
-//  Created by Tim Manu on 10/16/19.
-//  Copyright © 2019 Tim Manu. All rights reserved.
+//  Created by Tim Manu on 7/16/20.
+//  Copyright © 2020 Tim Manu. All rights reserved.
 //
 
 import UIKit

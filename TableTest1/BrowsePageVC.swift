@@ -2,8 +2,8 @@
 //  BrowsePageVC.swift
 //  TableTest1
 //
-//  Created by Tim Manu on 10/16/19.
-//  Copyright © 2019 Tim Manu. All rights reserved.
+//  Created by Tim Manu on 7/16/20.
+//  Copyright © 2020 Tim Manu. All rights reserved.
 //
 
 import UIKit
@@ -19,19 +19,19 @@ class BrowsePageVC: UIViewController {
         let image = UIImage(named: "navigation")
         let nb = UIButton()
         nb.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
+        nb.layer.shadowColor = UIColor.black.cgColor
+        nb.layer.shadowOffset = CGSize(width: 0.5, height: 0.3)
+        nb.layer.shadowRadius = 2
+        nb.layer.shadowOpacity = 0.3
         nb.setImage(image, for: .normal)
         nb.contentMode = .center
         nb.contentMode = .scaleAspectFill
-        nb.layer.cornerRadius = 23
+        nb.layer.cornerRadius = 28
         
         return nb
     }()
     
-    let searchContainerView: UIView = {
-        let searchCV = UIView()
-        searchCV.backgroundColor = .gray
-        return searchCV
-    }()
+
 
     
     struct Cells {
@@ -45,37 +45,24 @@ class BrowsePageVC: UIViewController {
         confgureTableView()
         
         view.addSubview(navigationButton)
-        view.addSubview(searchContainerView)
+        view.addSubview(searchVC.view)
         self.addChild(searchVC)
-        
-       // guard let root = UIApplication.shared.keyWindow?.rootViewController else {
-         //   return
-        //}
+
         let rootWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
         guard let rootVC = rootWindow?.rootViewController else { return }
         guard let navController = navigationController else { return }
-        
-        //let frame = self.view.safeAreaLayoutGuide.layoutFrame
-        //print("safe", view.safeAreaInsets.top)
-        //print("Safe area top: ", roou?.rootViewController?.view.safeAreaInsets.top)
+
         print("Safe area top: ", rootVC.view.safeAreaInsets.top)
-        //print("Safe area top: ", root.view.safeAreaInsets.top)
         print("Nav Controller top: ", navController.navigationBar.frame.size.height)
         let offsetStartPoint = rootVC.view.safeAreaInsets.top + navController.navigationBar.frame.size.height
         print("Offset start point: ", offsetStartPoint - (offsetStartPoint * 2))
-        //print("Nav controller: ", navigationController?.navigationBar.frame.size.height)
         
         
 
         setNavigationButtonConstraints()
         setTableViewConstraints()
         setupNavigationBar()
-        
-//        for family in UIFont.familyNames.sorted() {
-//            let names = UIFont.fontNames(forFamilyName: family)
-//            print("Family: \(family) Font names: \(names)")
-//        }
-        
+
     }
     
     fileprivate func setupNavigationBar() {
@@ -92,14 +79,14 @@ class BrowsePageVC: UIViewController {
     
     
     @objc func handleNavBarButton() {
-        
-        view.addSubview(searchVC.view)
 
         let endAnimationPoint = view.safeAreaInsets.top
+        print("endAnimationPoint: ", endAnimationPoint)
         let screenSize = UIScreen.main.bounds
-  
+        print("screen size: ", screenSize)
 
         let heightVal = screenSize.height - view.safeAreaInsets.bottom - view.safeAreaInsets.top
+        print("heightVal: ", heightVal)
 
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
             self.searchVC.view.frame = CGRect(x: 0, y: endAnimationPoint, width: screenSize.width, height: heightVal)
@@ -127,22 +114,9 @@ class BrowsePageVC: UIViewController {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print(scrollView.contentOffset.y)
-//        let safeAreaTop: CGFloat = 88
-//
-//        let offset = scrollView.contentOffset.y + safeAreaTop
-//
-//        searchContainerView.transform = .init(scaleX: 0, y: -offset)
     }
     
     
-    func setSearchContainerView() {
-        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
-        searchContainerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        searchContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        searchContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        searchContainerView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-
-    }
     
     func setTableViewConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -154,10 +128,10 @@ class BrowsePageVC: UIViewController {
     
     func setNavigationButtonConstraints() {
         navigationButton.translatesAutoresizingMaskIntoConstraints = false
-        navigationButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -115).isActive = true
+        navigationButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -33).isActive = true
         navigationButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        navigationButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
-        navigationButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        navigationButton.widthAnchor.constraint(equalToConstant: 56).isActive = true
+        navigationButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
     }
 
 
